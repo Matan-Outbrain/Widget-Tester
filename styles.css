@@ -35,6 +35,10 @@ body {
   z-index: 99;
 }
 
+.header.draftHeader {
+  background-color: var(--main-bg-color);
+}
+
 .header h1 {
   margin: auto;
 }
