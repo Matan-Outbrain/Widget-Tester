@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="./assets/OB-Amelia-2019-Web-Orange-1024x997.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="ob:category" content="pixnet.net" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js"></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css"
+    />
+    <script>
+      // fetch(
+      //   "http://chidc2c-engageapi-prod-chidc2.engageapi.service.chidc2.consul:8080/EngageApi/api/widget/widgets"
+      // )
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       throw new Error("Network response was not ok");
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((data) => {
+      //     console.log(data); // This will log the JSON response to the console
+      //     // You can do more with the data here
+      //   })
+      //   .catch((error) => {
+      //     console.error("There was a problem with the fetch operation:", error);
+      //   });
+
+      // async function getWidgetsNames() {
+      //   const response = await fetch(
+      //     "http://chidc2c-engageapi-prod-chidc2.engageapi.service.chidc2.consul:8080/EngageApi/api/widget/widgets"
+      //   );
+      //   const resJSON = await response.json();
+      //   console.log(response);
+      //   console.log(resJSON);
+      // }
+
+      // getWidgetsNames();
+
+      fetch(
+        "http://chidc2c-settingsprovider-prod-sample.settingsprovider.service.chidc2.consul:8052/SettingsProvider/api/v1/getSettingsByPublisherAndWidget?publisherId=176885&widgetId=113&settingTags=vidgetViConfigData",
+        {
+          method: "GET", // Using GET method as in the curl request
+          headers: {
+            accept: "*/*", // Accept header to allow any response type
+            "X-Trace": "true", // X-Trace header
+            "X-Seq": "true", // X-Seq header
+          },
+        }
+      )
+        .then((response) => response.json()) // Parse the JSON response
+        .then((data) => {
+          console.log("Success:", data); // Handle the successful response
+        })
+        .catch((error) => {
+          console.error("Error:", error); // Handle errors
+        });
+    </script>
+
+    <title>Widget Tester</title>
+  </head>
+  <body>
+    <header class="header">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAEsCAMAAACsQI2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3OUM1OUJEQjFFMjA2ODExODIyQTkxNzNEMDIwQzRDRiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2NTRFNzFGRTZGMzAxMUUzOUY4OEVBMjRCMzgyQTdFQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2NTRFNzFGRDZGMzAxMUUzOUY4OEVBMjRCMzgyQTdFQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzlDNTlCREIxRTIwNjgxMTgyMkE5MTczRDAyMEM0Q0YiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzlDNTlCREIxRTIwNjgxMTgyMkE5MTczRDAyMEM0Q0YiLz4gPC9yZGY6RGVzY3Jp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"
+        alt="logo"
+      />
+      <h1>IAB Widget Tester</h1>
+    </header>
+    <div class="container">
+      <form id="main-form" class="main-form">
+        <h2>Widget setup:</h2>
+
+        <div class="input-box">
+          <span class="prefix prefix-id"></span>
+          <input
+            id="idInput"
+            class="txt-input"
+            type="text"
+            placeholder="Widget ID"
+            required
+          />
+        </div>
+
+        <div class="input-box">
+          <span class="prefix prefix-data-src"></span>
+          <input
+            id="linkInput"
+            class="txt-input"
+            type="text"
+            placeholder="Data src"
+            required
+          />
+        </div>
+        <span class="checkbox-container draft-toggle">
+          <input type="checkbox" name="draftToggle" id="draftToggle" />
+          <label class="toggle" for="draftToggle"></label>Draft
+        </span>
+        <div class="radio-label">
+          <input type="radio" name="container-size" id="fixed-size" />
+          <label for="fixed-size">Container size:</label>
+        </div>
+        <div class="sizes-buttons">
+          <button
+            class="size-btn"
+            width-value="300"
+            height-value="250"
+          ></button>
+          <button class="size-btn" width-value="320" height-value="50"></button>
+          <button
+            class="size-btn"
+            width-value="300"
+            height-value="100"
+          ></button>
+          <button
+            class="size-btn"
+            width-value="160"
+            height-value="600"
+          ></button>
+          <button
+            class="size-btn"
+            width-value="400"
+            height-value="300"
+          ></button>
+          <button
+            class="size-btn"
+            width-value="300"
+            height-value="600"
+          ></button>
+          <button
+            class="size-btn"
+            width-value="320"
+            height-value="100"
+          ></button>
+          <button class="size-btn" width-value="728" height-value="90"></button>
+          <button
+            class="size-btn"
+            width-value="970"
+            height-value="250"
+          ></button>
+          <button
+            class="size-btn"
+            width-value="336"
+            height-value="280"
+          ></button>
+          <button class="size-btn" width-value="160" height-value="90"></button>
+          <button
+            class="size-btn"
+            width-value="640"
+            height-value="380"
+          ></button>
+        </div>
+
+        <div class="radio-label">
+          <input type="radio" name="container-size" id="custom-size" />
+          <label for="custom-size">Custom size:</label>
+        </div>
+        <div class="custom-size-inp">
+          <input
+            type="number"
+            name="width"
+            id="width"
+            min="0"
+            placeholder="Width"
+            disabled
+          />
+          <span> x </span>
+          <input
+            type="number"
+            name="height"
+            id="height"
+            min="0"
+            placeholder="Height"
+            disabled
+          />
+        </div>
+
+        <span class="checkbox-container">
+          <input type="checkbox" name="autoRefresh" id="autoRefresh" />
+          <label class="toggle" for="autoRefresh"></label>
+          <span>Auto refresh every 30 seconds</span>
+        </span>
+        <span class="countdown hide">
+          <span id="countdown">30</span> seconds until refresh</span
+        >
+        <button type="submit" id="display">Display</button>
+      </form>
+      <div id="capture" class="placeholder">
+        <div class="label width-label" id="widthLabel"></div>
+        <div class="label height-label" id="heightLabel"></div>
+        <div
+          id="widget"
+          class="OUTBRAIN"
+          data-src="DROP_PERMALINK_HERE"
+          data-widget-id=""
+        ></div>
+        <script
+          type="text/javascript"
+          async="async"
+          src="//widgets.outbrain.com/outbrain.js"
+        ></script>
+      </div>
+    </div>
+
+    <script>
+      const sizeButtons = document.getElementsByClassName("size-btn");
+      const displayButton = document.getElementById("display");
+      const fixedSizeRadio = document.getElementById("fixed-size");
+      const customSizeRadio = document.getElementById("custom-size");
+      const widthInput = document.getElementById("width");
+      const heightInput = document.getElementById("height");
+      const mainForm = document.getElementById("main-form");
+      const widgetContainer = document.getElementsByClassName("OUTBRAIN")[0];
+      const widthLabel = document.getElementById("widthLabel");
+      const heightLabel = document.getElementById("heightLabel");
+      const placeholder = document.getElementsByClassName("placeholder")[0];
+      const autoRefresh = document.getElementById("autoRefresh");
+      const draftToggle = document.getElementById("draftToggle");
+      const widgetIDInput = document.getElementById("idInput");
+      let widthToDisplay = 0;
+      let heightToDisplay = 0;
+      let isDisplayed = false;
+
+      // Function to handle radio button change
+      function handleRadioChange() {
+        if (fixedSizeRadio.checked) {
+          widthInput.disabled = true;
+          heightInput.disabled = true;
+          addClassToElements(sizeButtons, "enabled");
+          addClassToElements([widthInput, heightInput], "disabled");
+        } else if (customSizeRadio.checked) {
+          widthInput.disabled = false;
+          heightInput.disabled = false;
+          addClassToElements([widthInput, heightInput], "enabled");
+          addClassToElements(sizeButtons, "disabled");
+        } else {
+          widthInput.disabled = true;
+          heightInput.disabled = true;
+          addClassToElements(sizeButtons, "disabled");
+          addClassToElements([widthInput, heightInput], "disabled");
+        }
+      }
+
+      // Helper function to add or remove class based on enabled state
+      function addClassToElements(elements, className) {
+        for (let button of elements) {
+          button.classList.remove("enabled", "disabled");
+          button.classList.add(className);
+        }
+      }
+
+      function handleDisplayClick(event) {
+        event.preventDefault();
+        console.log("change");
+        if (
+          isDisplayed &&
+          widgetIDInput.value !==
+            widgetContainer.attributes["data-widget-id"].value
+        ) {
+          swal({
+            title: "Sorry...",
+            text: "Please refresh the page in order to change widget ID",
+            type: "error",
+            confirmButtonText: "OK",
+          });
+        }
+
+        console.log("form submitted");
+        let validationFlag = true;
+
+        if (fixedSizeRadio.checked) {
+          if (widthToDisplay <= 0 || heightToDisplay <= 0) {
+            validationFlag = false;
+            swal({
+              title: "Error!",
+              text: "Please select container size",
+              type: "error",
+              confirmButtonText: "OK",
+            });
+          }
+        } else if (customSizeRadio.checked) {
+          if (widthToDisplay <= 0 || heightToDisplay <= 0) {
+            validationFlag = false;
+            swal({
+              title: "Error!",
+              text: "Both width & height must be > 0",
+              type: "error",
+              confirmButtonText: "OK",
+            });
+          }
+        } else {
+          if (widthToDisplay <= 0 || heightToDisplay <= 0) {
+            validationFlag = false;
+            swal({
+              title: "Error!",
+              text: "Please select wanted container size",
+              type: "error",
+              confirmButtonText: "OK",
+            });
+          }
+        }
+        if (validationFlag) {
+          let tempWidth;
+          let tempHeight;
+
+          if (fixedSizeRadio.checked) {
+            tempWidth = widthToDisplay;
+            tempHeight = heightToDisplay;
+          } else {
+            tempWidth = parseInt(widthInput.value, 10);
+            tempHeight = parseInt(heightInput.value, 10);
+          }
+
+          if (widgetContainer) {
+            widgetContainer.style.width = tempWidth + "px";
+            widgetContainer.style.height = tempHeight + "px";
+          }
+
+          placeholder.style.width = tempWidth + "px";
+          placeholder.style.height = tempHeight + "px";
+
+          widthLabel.textContent = `Width: ${tempWidth}px`;
+          heightLabel.textContent = `Height: ${tempHeight}px`;
+          setWidgetAttribute();
+
+          isDisplayed = true;
+
+          if (autoRefresh.checked) {
+            logEvery30Seconds();
+          }
+        }
+
+        if (!document.getElementById("refresh")) {
+          const refreshBtn = document.createElement("button");
+          refreshBtn.id = "refresh";
+          refreshBtn.innerText = "Refresh";
+          refreshBtn.addEventListener(
+            "click",
+            console.log(OBR.extern.refreshWidget())
+          );
+          displayButton.insertAdjacentElement("afterend", refreshBtn);
+          // setTimeout(injectScreenshotBtn, 10000);
+
+          console.log(
+            "Width: " + widthToDisplay + " Height: " + heightToDisplay
+          );
+        }
+        console.log(OBR.extern.refreshWidget());
+      }
+
+      // Add event listeners to radio buttons
+      document
+        .querySelectorAll('input[name="container-size"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", handleRadioChange);
+        });
+
+      // Add event listeners to display button
+      mainForm.addEventListener("submit", handleDisplayClick);
+
+      // Add event listeners to size inputs
+      widthInput.addEventListener("change", () => {
+        widthToDisplay = parseInt(widthInput.value, 10);
+      });
+      heightInput.addEventListener("change", () => {
+        heightToDisplay = parseInt(heightInput.value, 10);
+      });
+
+      // Inject values for size buttons
+      function handleSizeButtonsLoad() {
+        for (let index = 0; index < sizeButtons.length; index++) {
+          sizeButtons[index].addEventListener("click", handleSizeButtonClick);
+
+          let intWidth = parseInt(
+            sizeButtons[index].attributes["width-value"].value,
+            10
+          );
+          let intHeight = parseInt(
+            sizeButtons[index].attributes["height-value"].value,
+            10
+          );
+
+          sizeButtons[index].innerText = intWidth + " x " + intHeight;
+        }
+      }
+
+      function handleSizeButtonClick(event) {
+        event.preventDefault();
+        if (fixedSizeRadio.checked) {
+          let btnArr = [...sizeButtons];
+          btnArr.forEach((btn) => btn.classList.remove("selected"));
+          widthToDisplay = parseInt(this.attributes["width-value"].value, 10);
+          heightToDisplay = parseInt(this.attributes["height-value"].value, 10);
+          this.classList.add("selected");
+        }
+      }
+
+      // function setWidgetAttribute() {
+      //   const capture = document.getElementById("capture");
+
+      //   const widgetID = document.getElementById("idInput").value;
+      //   const widgetLink = document.getElementById("linkInput").value;
+
+      //   if (draftToggle.checked) {
+      //     if (widgetLink.slice(-1) === "?") {
+      //       widgetContainer.attributes["data-src"].value =
+      //         widgetLink + "&obdraft=true";
+      //       console.log(widgetLink + "lalala");
+      //     } else {
+      //       widgetContainer.attributes["data-src"].value =
+      //         widgetLink + "?obdraft=true";
+      //     }
+      //   }
+
+      //   // remove the last widget from the HTML if exists
+      //   console.log(document.querySelector("div.OUTBRAIN"));
+
+      //   // capture.insertAdjacentElement("beforeend", generateOBScript());
+
+      //   // add the new edited widget
+      //   capture.insertAdjacentElement(
+      //     "beforeend",
+      //     generateWidgetElement(widgetID, widgetLink)
+      //   );
+      // }
+      console.log(document.querySelector("div.OUTBRAIN"));
+
+      autoRefresh.addEventListener("change", logEvery30Seconds);
+
+      function logEvery30Seconds() {
+        const countdownParent = document.getElementsByClassName("countdown")[0];
+        console.log(countdownParent);
+        if (isDisplayed && autoRefresh.checked) {
+          const countdownSpan = document.getElementById("countdown");
+          const autoRefresh = document.getElementById("autoRefresh");
+          let countdown = 30;
+
+          countdownParent.classList.remove("hide");
+
+          // Update the countdown every second
+          setInterval(() => {
+            if (countdown === 0) {
+              countdown = 30; // Reset the countdown
+            }
+            countdownSpan.textContent = countdown; // Update the span with the current countdown
+            countdown--;
+          }, 1000);
+
+          // Handle widget refresh every 30 seconds
+          setInterval(() => {
+            if (autoRefresh.checked) {
+              console.log(OBR.extern.refreshWidget());
+              const currentTime = new Date().toLocaleTimeString();
+              console.log(`Widget refreshed at: ${currentTime}`);
+            }
+          }, 30000);
+        } else {
+          countdownParent.classList.add("hide");
+        }
+      }
+
+      function setWidgetAttribute() {
+        widgetContainer.attributes["data-widget-id"].value = "";
+        widgetContainer.attributes["data-src"].value = "";
+
+        console.log(OBR.extern.refreshWidget());
+
+        const widgetID = document.getElementById("idInput").value;
+        let widgetLink = document.getElementById("linkInput").value;
+
+        widgetContainer.attributes["data-widget-id"].value = widgetID;
+        if (draftToggle.checked) {
+          if (!widgetLink.includes("obdraft=true")) {
+            widgetLink += "?obdraft=true";
+          }
+        }
+        widgetContainer.attributes["data-src"].value = widgetLink;
+      }
+
+      // Initialize state on page load
+      handleRadioChange();
+      handleSizeButtonsLoad();
+    </script>
+  </body>
+</html>

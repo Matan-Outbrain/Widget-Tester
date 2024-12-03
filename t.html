@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a
+      target="_blank"
+      href="http://chidc2c-settingsprovider-prod-sample.settingsprovider.service.chidc2.consul:8052/SettingsProvider/api/v1/getSettingsByPublisherAndWidget?publisherId=176885&widgetId=113&settingTags=vidgetViConfigData"
+      >test</a
+    >
+    <select name="widget_Id" id="widget_Id">
+      <option value="">Widget ID</option>
+    </select>
+
+    <script>
+      // fetch(
+      //   "http://chidc2c-settingsprovider-prod-sample.settingsprovider.service.chidc2.consul:8052/SettingsProvider/api/v1/getSettingsByPublisherAndWidget?publisherId=176885&widgetId=113&settingTags=vidgetViConfigData",
+      //   {
+      //     method: "GET", // Using GET method as in the curl request
+      //     headers: {
+      //       accept: "*/*", // Accept header to allow any response type
+      //       "X-Trace": "true", // X-Trace header
+      //       "X-Seq": "true", // X-Seq header
+      //     },
+      //   }
+      // )
+      //   .then((response) => response.json()) // Parse the JSON response
+      //   .then((data) => {
+      //     console.log("Success:", data); // Handle the successful response
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error); // Handle errors
+      //   });
+      function run() {
+        // Creating Our XMLHttpRequest object
+        let xhr = new XMLHttpRequest();
+
+        // Making our connection
+        let url =
+          "http://chidc2c-engageapi-prod-chidc2.engageapi.service.chidc2.consul:8080/EngageApi/api/widget/widgets";
+        xhr.open("GET", url, true);
+
+        // function execute after request is successful
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // console.log(this);
+            // console.log(this.responseText);
+            const obj = JSON.parse(this.response);
+            const obj1 = obj.widgetInfoDTOList;
+            // console.log(obj.widgetInfoDTOList[0].widgetJsId);
+            // console.log(this.response.widgetInfoDTOList);
+            console.log(obj1);
+            getWidgetsNames(obj1);
+          }
+        };
+        // Sending our request
+        xhr.send();
+      }
+      run();
+
+      function getWidgetsNames(object) {
+        const idElements = [];
+        console.log(object[0]);
+        object.forEach((obj) => {
+          Object.entries(obj).forEach(([key, value]) => {
+            // console.log(`${key} ${value}`);
+            if (key === "widgetJsId") {
+              // console.log(`${key} ${value}`);
+              const opt = document.createElement("option");
+              opt.value = value;
+              opt.innerText = value;
+              console.log(opt);
+              idElements.push(opt);
+            }
+          });
+        });
+        console.log(idElements);
+        idElements.forEach((id) => {
+          document
+            .getElementById("widget_Id")
+            .insertAdjacentElement("beforeend", id);
+        });
+      }
+    </script>
+  </body>
+</html>
