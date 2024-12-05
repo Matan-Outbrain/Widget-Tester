@@ -503,7 +503,27 @@
         isFirstDraftChange = false;
       }
 
+      function forceTestModeOnURL() {
+        console.log(document.location.href);
+        if (
+          document.location.href ===
+          "https://matan-outbrain.github.io/Widget-Tester/"
+        ) {
+          document.location.href =
+            "https://matan-outbrain.github.io/Widget-Tester/?testMode=true";
+        }
+
+        if (
+          document.location.href ===
+          "https://matan-outbrain.github.io/Widget-Tester/?obdraft=true"
+        ) {
+          document.location.href =
+            "https://matan-outbrain.github.io/Widget-Tester/?obdraft=true&testMode=true";
+        }
+      }
+
       // Initialize state on page load
+      forceTestModeOnURL();
       checkDraftState();
       handleRadioChange();
       handleSizeButtonsLoad();
