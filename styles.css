@@ -109,7 +109,6 @@ input[type="radio"] {
 
 .txt-input {
   box-sizing: border-box;
-  width: 100%;
   font-size: 14px;
   padding: 2px 2px 2px 30px;
 }
@@ -129,6 +128,25 @@ input[type="radio"] {
 
 .prefix-data-src {
   background-image: url("./assets/link.png");
+}
+
+.delete-txt-btn {
+  position: absolute;
+  top: 5px;
+  margin-left: 2.5px;
+  font-size: 12px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.delete-txt-btn:hover {
+  font-size: 13px;
+}
+
+.delete-txt-btn.show {
+  display: inline-block;
 }
 
 .radio-label {
