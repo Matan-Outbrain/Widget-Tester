@@ -96,7 +96,7 @@ function handleDisplayClick(event) {
     tempHeight = parseInt(heightInput.value, 10);
   } else {
     tempWidth =
-      parseFloat(window.getComputedStyle(capture.parentNode).width) * 0.9;
+      parseFloat(window.getComputedStyle(capture.parentNode).width) * 0.8;
   }
 
   if (widgetContainer) {
@@ -107,33 +107,37 @@ function handleDisplayClick(event) {
   placeholder.style.width = tempWidth + "px";
   placeholder.style.height = tempHeight + "px";
 
-  widthLabel.textContent = `Width: ${tempWidth}px`;
-  heightLabel.textContent = `Height: ${tempHeight}px`;
-  setWidgetAttribute();
+  widthLabel.textContent = `Width: ${tempWidth.toFixed(2)}px`;
+  heightLabel.textContent = `Height: ${
+    tempHeight ? tempHeight + "px" : "auto"
+  }`;
+  injectWidgetDiv();
+  injectScript();
 
   isDisplayed = true;
 
   if (autoRefresh.checked) {
     logEvery30Seconds();
   }
-  //   }
 
   if (!document.getElementById("refresh")) {
-    const refreshBtn = document.createElement("button");
-    refreshBtn.id = "refresh";
-    refreshBtn.innerText = "Refresh";
-    refreshBtn.addEventListener(
-      "click",
-      console.log(OBR.extern.refreshWidget())
-    );
-    displayButton.insertAdjacentElement("afterend", refreshBtn);
-    // setTimeout(injectScreenshotBtn, 10000);
-
-    // console.log("Width: " + widthToDisplay + " Height: " + heightToDisplay);
-    displayButton.disabled = true;
-    displayButton.classList.add("disabled");
+    setTimeout(() => {
+      const refreshBtn = document.createElement("button");
+      refreshBtn.id = "refresh";
+      refreshBtn.innerText = "Refresh";
+      refreshBtn.addEventListener(
+        "click",
+        console.log(OBR.extern.refreshWidget())
+      );
+      displayButton.insertAdjacentElement("afterend", refreshBtn);
+      displayButton.disabled = true;
+      displayButton.classList.add("disabled");
+    }, 3000);
   }
-  console.log(OBR.extern.refreshWidget());
+
+  const widgetID = document.getElementById("idInput").value;
+  let widgetLink = document.getElementById("linkInput").value;
+  saveDataToSessionStorage(widgetID, widgetLink);
 }
 
 // Add event listeners to radio buttons
@@ -220,20 +224,6 @@ function logEvery30Seconds() {
   }
 }
 
-function setWidgetAttribute() {
-  widgetContainer.attributes["data-widget-id"].value = "";
-  widgetContainer.attributes["data-src"].value = "";
-
-  console.log(OBR.extern.refreshWidget());
-
-  const widgetID = document.getElementById("idInput").value;
-  let widgetLink = document.getElementById("linkInput").value;
-  widgetContainer.attributes["data-widget-id"].value = widgetID;
-  widgetContainer.attributes["data-src"].value = widgetLink;
-
-  saveDataToSessionStorage(widgetID, widgetLink);
-}
-
 draftToggle.addEventListener("change", handleDraftToggleChange);
 
 function handleDraftToggleChange() {
@@ -308,6 +298,34 @@ function handleDeleteDataSrcClick() {
   widgetLink.value = null;
   deleteDataSrc.classList.toggle("show");
   sessionStorage.removeItem("widget_link");
+}
+
+function injectScript() {
+  // remove the current script if it exists
+  if (document.contains(document.getElementById("obScript"))) {
+    document.getElementById("obScript").remove();
+  }
+  const script = document.createElement("script");
+  script.id = "obScript";
+  script.type = "text/javascript"; // set the type (optional because it's the default)
+  script.async = true; // set async attribute
+  script.src = "//widgets.outbrain.com/outbrain.js"; // set the source
+
+  document.head.appendChild(script);
+}
+
+function injectWidgetDiv() {
+  // remove the current widget div if it exists
+  if (document.contains(document.getElementById("widget"))) {
+    document.getElementById("widget").remove();
+  }
+  const div = document.createElement("div");
+  div.id = "widget";
+  div.classList.add("OUTBRAIN");
+  div.dataset.src = document.getElementById("linkInput").value;
+  div.dataset.widgetId = document.getElementById("idInput").value;
+
+  capture.insertAdjacentElement("beforeend", div);
 }
 
 // Initialize state on page load
